@@ -16,7 +16,12 @@ const SearchResult:  SearchResultInterface = ({items, ...props}) => {
             const imgSrc = item.snippet.thumbnails.high.url;
             const href = `https://www.youtube.com/watch?v=${item.id.videoId}`;
             return (
-                    <a className="yt-search-content-main" key={idx} href={href} target="_blank">
+                    <a
+                        className="yt-search-content-main"
+                        key={idx}
+                        href={href}
+                        target="_blank"
+                        rel="noreferrer noopener">
                         <div className="card">
                             <img src={imgSrc} className="rounded float-start" alt="" width="100%"/>
                             <p>{title}</p>
