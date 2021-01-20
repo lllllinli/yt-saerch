@@ -17,14 +17,16 @@ const SearchResult:  SearchResultInterface = ({items, ...props}) => {
             const href = `https://www.youtube.com/watch?v=${item.id.videoId}`;
             return (
                     <a
-                        className="yt-search-content-main"
+                        className="yt-search-content-main text-decoration-none"
                         key={idx}
                         href={href}
                         target="_blank"
                         rel="noreferrer noopener">
-                        <div className="card">
-                            <img src={imgSrc} className="rounded float-start" alt="" width="100%"/>
-                            <p>{title}</p>
+                        <div className="card yt-card mt-5">
+                            <img src={imgSrc} className="rounded float-start yt-card-img" alt="" width="100%"/>
+                            <p className="m-2 yt-card-title yt-card-text yt-card-ellipsis">
+                                <span className="yt-card-text-concat">{title}</span>
+                            </p>
                         </div>
                     </a>
 

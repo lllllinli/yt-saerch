@@ -41,12 +41,12 @@ function App() {
 
   return (
       <>
-          <header className="navbar navbar-light bg-light">
+          <header className="yt-header">
               <div className="container-sm mt-3">
                 <InputSearch onSearch={searchHandle}/>
               </div>
           </header>
-          <main role="main" className="container-sm" >
+          <main role="main" className="container-sm pt-5" >
             <SearchResult items={items} />
               {renderPagination()}
           </main>

@@ -1,4 +1,50 @@
+@import '~bootstrap/scss/bootstrap';
+
 .yt-link {
   display: block;
   width: 100%;
+}
+
+.yt-search-content-main {
+  &:hover {
+    .yt-card-img {
+      filter: blur(2px);
+    }
+  }
+}
+
+.yt-card {
+  background: rgba( 255, 255, 255, 0.25 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 4px );
+  border-radius: 10px;
+}
+
+.yt-card-title {
+  color: $dark;
+}
+
+.yt-card-text {
+  position: relative;
+  font-size: 14px;
+  font-weight: bold;
+  color: $dark;
+  width: 95%; /* Could be anything you like. */
+}
+
+.yt-card-text-concat {
+  position: relative;
+  display: inline-block;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 3.6em; /* (Number of lines you want visible) * (line-height) */
+  line-height: 1.2em;
+  text-align:justify;
+}
+
+.yt-card-text .yt-card-ellipsis::after {
+  content: "...";
+  position: absolute;
+  right: -12px;
+  bottom: 4px;
 }
