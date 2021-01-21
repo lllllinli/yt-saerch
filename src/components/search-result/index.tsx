@@ -23,7 +23,11 @@ const SearchResult:  SearchResultInterface = ({items, ...props}) => {
                         target="_blank"
                         rel="noreferrer noopener">
                         <div className="card yt-card mt-5">
-                            <img src={imgSrc} className="rounded float-start yt-card-img" alt="" width="100%"/>
+                            <img
+                                src={imgSrc}
+                                className="rounded float-start yt-card-img"
+                                alt=""
+                                width="100%"/>
                             <p className="m-2 yt-card-title yt-card-text yt-card-ellipsis">
                                 <span className="yt-card-text-concat">{title}</span>
                             </p>

@@ -1,0 +1,24 @@
+@import '~bootstrap/scss/bootstrap';
+
+.yt-search {
+  width: 500px;
+  margin: auto;
+}
+
+@media  (max-width: 576px) {
+  .yt-search {
+    width: 90%;
+    margin: auto;
+  }
+}
+
+
+.input-group .yt-control {
+  background: rgba(0,0,0, 0.6);
+  color: rgb(255,255,255);
+
+  &:focus {
+    background: rgba(0,0,0, 0.6);
+    color: rgb(255,255,255);
+  }
+}

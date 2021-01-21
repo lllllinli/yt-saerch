@@ -32,5 +32,17 @@
   backdrop-filter: blur( 4px );
   border-radius: 10px;
   height: 85px;
-  border: 1px solid;
+  border: 1px solid rgba(255, 255, 255, 0.1 );
+}
+
+
+.yt-main {
+  min-height: calc(100vh - 85px);
+}
+
+.yt-footer {
+  background: rgba(33, 33, 33, 1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(4px);
+  height: 150px;
 }

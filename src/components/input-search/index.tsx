@@ -1,14 +1,8 @@
 import * as React from 'react';
 import { useCallback, useState } from 'react';
 import { Search } from '@material-ui/icons'
-
-
-interface InputSearchProps {
-    onSearch: (value: string) => void;
-}
-
-
-interface InputSearchInterface extends React.FC<InputSearchProps> {}
+import { InputSearchInterface } from './types';
+import './inputSearch.scss';
 
 const initState = '';
 
@@ -33,9 +27,19 @@ const InputSearch: InputSearchInterface = ({
     }, []);
 
     return (
-        <div className="input-group mb-3">
-            <input onChange={changeHandle} className="form-control" placeholder="搜尋" onKeyDown={keyDownHandle} />
-            <button onClick={clickHandle} className="btn btn-outline-secondary"><Search /></button>
+        <div className="yt-search">
+            <div className="input-group mb-3">
+                <input
+                    onChange={changeHandle}
+                    className="form-control yt-control"
+                    placeholder="搜尋"
+                    onKeyDown={keyDownHandle} />
+                <button
+                    onClick={clickHandle}
+                    className="btn btn-outline-secondary">
+                    <Search />
+                </button>
+            </div>
         </div>
     );
 }

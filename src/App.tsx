@@ -1,7 +1,7 @@
 import React, {useCallback} from 'react';
 import './App.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import {changePage, searchNextYouTubeVideos, searchYouTubeVideos} from './redux/modules/actions';
+import { changePage, searchNextYouTubeVideos, searchYouTubeVideos } from './redux/modules/actions';
 import InputSearch from './components/input-search';
 import { selectVideoState } from './redux/modules/selectors';
 import SearchResult from './components/search-result';
@@ -46,10 +46,15 @@ function App() {
                 <InputSearch onSearch={searchHandle}/>
               </div>
           </header>
-          <main role="main" className="container-sm pt-5" >
+          <main role="main" className="container-sm pt-5 yt-main" >
             <SearchResult items={items} />
-              {renderPagination()}
+
           </main>
+          <footer className="yt-footer mt-5">
+              <div className="mb-lg-5">
+                  {renderPagination()}
+              </div>
+          </footer>
       </>
   );
 }

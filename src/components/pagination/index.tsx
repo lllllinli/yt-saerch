@@ -10,7 +10,14 @@ interface PaginationProps {
 
 interface PaginationInterface extends React.FC<PaginationProps> {}
 
-const initialState = {
+interface PaginationStateInterface {
+    currentPage: number;
+    pageUnit: number;
+    pageListCount: number;
+    totalPage: number;
+}
+
+const initialState: PaginationStateInterface = {
     currentPage: 1,
     pageUnit: 5,
     pageListCount: 5,
@@ -22,7 +29,7 @@ const PREVIOUS_PAGE = 'PREVIOUS_PAGE';
 const GO_TO_PAGE = 'GO_TO_PAGE';
 const SET_OPTIONS = 'SET_OPTIONS';
 
-const getNextPageState = (state: any, pageUnit: number, totalPage: number) => {
+const getNextPageState = (state: PaginationStateInterface, pageUnit: number, totalPage: number) => {
     const currentPage = state.currentPage + 1;
     const pageListCount = (currentPage > state.pageListCount)
         ? (state.pageListCount + state.pageUnit)
@@ -35,7 +42,7 @@ const getNextPageState = (state: any, pageUnit: number, totalPage: number) => {
     };
 }
 
-const getPreviousPageState = (state: any, pageUnit: number, totalPage: number) => {
+const getPreviousPageState = (state: PaginationStateInterface, pageUnit: number, totalPage: number) => {
     const currentPage = state.currentPage - 1;
     const pageListCount = (
         currentPage < state.pageListCount
@@ -53,7 +60,7 @@ const getPreviousPageState = (state: any, pageUnit: number, totalPage: number) =
     };
 };
 
-const getGoToPageState = (state: any, action:any, pageUnit: number, totalPage: number) => {
+const getGoToPageState = (state: PaginationStateInterface, action: PaginationStateInterface, pageUnit: number, totalPage: number) => {
     return {
         currentPage: action.currentPage,
         pageUnit,
@@ -62,7 +69,7 @@ const getGoToPageState = (state: any, action:any, pageUnit: number, totalPage: n
     };
 };
 
-const getSetOptionsState = (state: any, action: any, pageUnit: number) => {
+const getSetOptionsState = (state: PaginationStateInterface, action: PaginationStateInterface, pageUnit: number) => {
     return {
         currentPage: state.currentPage,
         pageUnit,
@@ -71,7 +78,7 @@ const getSetOptionsState = (state: any, action: any, pageUnit: number) => {
     };
 };
 
-const reducer = (state: any, action: any) => {
+const reducer = (state: PaginationStateInterface, action: any) => {
     const pageUnit = state.pageUnit;
     const totalPage = state.totalPage;
     switch (action.type) {
@@ -119,7 +126,10 @@ const previousBtnRender = (state: any, pageHandle: (type: string) => void) => {
     if (state.currentPage !== 1) {
         return (
             <li className="page-item">
-                <button className="page-link" aria-label="Previous" onClick={() => pageHandle(PREVIOUS_PAGE)}>
+                <button
+                    className="page-link"
+                    aria-label="Previous"
+                    onClick={() => pageHandle(PREVIOUS_PAGE)}>
                     <span aria-hidden="true">&laquo;</span>
                 </button>
             </li>
@@ -136,14 +146,30 @@ const nextBtnRender = (state: any, pageHandle: (type: string) => void) => {
                 </button>
             </li>
         );
-    } else {
-        return null;
-    }
+    } else { return null; }
 }
 
+// const getList = (pageItems: any, state: any, clickHandle: (page: number) => void) => {
+//     return (pageItems.map((item: number) => {
+//         const listClass = item === state.currentPage ? 'page-item active' : 'page-item';
+//         return (
+//             <li
+//                 key={item}
+//                 className={listClass}>
+//                 <button
+//                     className="page-link"
+//                     onClick={() => clickHandle(item)}
+//                 >
+//                     {item}
+//                 </button>
+//             </li>
+//         );
+//     });)
+// };
+
 const Pagination: PaginationInterface = ({
-                                             totalPage,
-                                             onPageChange
+    totalPage,
+    onPageChange
 }) => {
     initialState.totalPage = totalPage;
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -160,16 +186,15 @@ const Pagination: PaginationInterface = ({
     const pageHandle = useCallback((type: string) => {
         switch (type) {
             case PREVIOUS_PAGE:
-                dispatch({
-                    type: PREVIOUS_PAGE
-                })
+                dispatch({ type: PREVIOUS_PAGE});
                 break;
 
             case NEXT_PAGE:
-                dispatch({
-                    type: NEXT_PAGE
-                })
+                dispatch({ type: NEXT_PAGE});
                 break;
+
+            default:
+                console.error(`use error type. ${type}`);
         }
     }, [dispatch]);
 
