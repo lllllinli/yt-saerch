@@ -1,11 +1,11 @@
 @import '~bootstrap/scss/bootstrap';
 
 .yt-search {
-  width: 500px;
+  width: 576px;
   margin: auto;
 }
 
-@media  (max-width: 576px) {
+@include media-breakpoint-down(sm) {
   .yt-search {
     width: 90%;
     margin: auto;
@@ -21,4 +21,10 @@
     background: rgba(0,0,0, 0.6);
     color: rgb(255,255,255);
   }
+
+  &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(105, 172, 250);
+    opacity: 1; /* Firefox */
+  }
+
 }
