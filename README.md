@@ -17,6 +17,14 @@ yarn run start
 
 ## 使用技術
 
+### 啟動基本安裝與添加功能
+
++ create-react-app
++ [CRACO](https://github.com/gsoft-inc/craco)
+
+
+### 基礎套件與語言設定
+
 + Typescript
 + React
 + Redux
@@ -25,6 +33,11 @@ yarn run start
 + rxjs
 + redux-observable
 
+### styles 樣式
+
 + SCSS
-+ Bootstrap
++ Bootstrap 5
++ material icons (use material-ui)
 > node-sass 5.0 版會發生衝突，暫時使用 node-sass@4.14.1
+
+### webpack 

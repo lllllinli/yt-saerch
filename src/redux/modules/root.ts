@@ -1,10 +1,14 @@
 import { combineEpics } from 'redux-observable';
 import { combineReducers } from 'redux';
-import { videoReducer } from './reducers';
-import { searchNextYouTubEpic, searchYouTubEpic } from './epics';
+import { searchYouTubEpic } from './epics/searchYouTubEpic';
+import { searchNextYouTubEpic } from './epics/searchNextYouTubEpic';
+import { videoReducer } from './reducers/videoReducer';
+import { PayloadInterface } from './types';
+import { apiReducer } from './reducers/apiReducer';
 
 export interface IRootState {
-    videoState: any,
+    videoState: null | PayloadInterface,
+    apiState: any,
 }
 
 export const rootEpic = combineEpics(
@@ -14,4 +18,5 @@ export const rootEpic = combineEpics(
 
 export const rootReducer = combineReducers({
     videoState: videoReducer,
+    apiState: apiReducer,
 });
