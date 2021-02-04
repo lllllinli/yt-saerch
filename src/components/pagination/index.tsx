@@ -149,24 +149,6 @@ const nextBtnRender = (state: any, pageHandle: (type: string) => void) => {
     } else { return null; }
 }
 
-// const getList = (pageItems: any, state: any, clickHandle: (page: number) => void) => {
-//     return (pageItems.map((item: number) => {
-//         const listClass = item === state.currentPage ? 'page-item active' : 'page-item';
-//         return (
-//             <li
-//                 key={item}
-//                 className={listClass}>
-//                 <button
-//                     className="page-link"
-//                     onClick={() => clickHandle(item)}
-//                 >
-//                     {item}
-//                 </button>
-//             </li>
-//         );
-//     });)
-// };
-
 const Pagination: PaginationInterface = ({
     totalPage,
     onPageChange

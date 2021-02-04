@@ -1,12 +1,10 @@
-import { interval, Observable, of } from 'rxjs';
-import { catchError, debounce, map, mergeMap, startWith } from 'rxjs/operators';
-import { ofType } from 'redux-observable';
-import { SEARCH_YOUTUBE_VIDEOS } from '../actionTypes';
+import { from, interval, Observable, of } from 'rxjs';
+import { catchError, debounce, filter, map, mergeMap, startWith } from 'rxjs/operators';
 import queryString from 'querystring';
-import { ajax } from 'rxjs/ajax';
-import { fetchVideoFulfilled } from '../actions/fetchVideoFulfilled';
-import { apiFetchError } from '../actions/apiStatus';
 import { SearchResponseInterface } from '../types';
+import { isActionOf } from 'typesafe-actions';
+import { Epic } from 'redux-observable';
+import { fetchVideoFulfilled, searchYouTubeVideos } from '../actions/actions';
 
 const loadSuggestionsInProgress = () => {
   return {
@@ -15,32 +13,38 @@ const loadSuggestionsInProgress = () => {
   }
 }
 
-const API_KEY = 'AIzaSyAMgk-hV-duSQMwM6s68141-3NF8lPNueg';
+const getRequest = (url: string) => {
+  const request = fetch(url)
+    .then(response => response.json())
+  return from(request)
+}
 
-export const searchYouTubEpic = (action$: Observable<any>, state$: any) => {
+const getUrl = (searchKeyword: string) => {
+  const apiKey = process.env.REACT_APP_YOUTUBE_API_KEY;
+  const maxResults = 50;
+  const youtubeSearchParams = {
+    key: apiKey,
+    q: searchKeyword,
+    maxResults,
+    part: 'id,snippet',
+    type: 'video'
+  };
+  return `https://www.googleapis.com/youtube/v3/search?${queryString.stringify(youtubeSearchParams)}`;
+}
+
+
+export const searchYouTubEpic: Epic<any> = (action$: Observable<any>, state$: any) => {
   return action$.pipe(
-    ofType(SEARCH_YOUTUBE_VIDEOS),
+    filter(isActionOf(searchYouTubeVideos)),
     debounce(() => interval(1000)),
     mergeMap((action) => {
       const searchKeyword = action.keyword;
-      const maxResults = 50;
-      const youtubeSearchParams = {
-        key: API_KEY,
-        q: searchKeyword,
-        maxResults,
-        part: 'id,snippet',
-        type: 'video'
-      };
-      const url = `https://www.googleapis.com/youtube/v3/search?${queryString.stringify(youtubeSearchParams)}`;
-      return ajax
-        .getJSON(url)
+      const url = getUrl(searchKeyword);
+      
+      return getRequest(url)
         .pipe(
-          map((response) => fetchVideoFulfilled(response as SearchResponseInterface, searchKeyword)),
-          catchError(error => {
-            console.error('error: ', error);
-            apiFetchError(error);
-            return of(error);
-          }),
+          map((response: SearchResponseInterface) => fetchVideoFulfilled(response, searchKeyword)),
+          catchError(error => of(error)),
         );
     }),
     startWith(loadSuggestionsInProgress()),

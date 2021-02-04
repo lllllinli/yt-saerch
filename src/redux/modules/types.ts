@@ -40,7 +40,7 @@ export interface PageInfoInterface {
 
 export interface SearchResponseInterface {
     etag: string;
-    items: Array<VideoItem>;
+    items: Array<VideoItem> | null;
     kind: string;
     nextPageToken: string;
     pageInfo: PageInfoInterface;
@@ -48,7 +48,7 @@ export interface SearchResponseInterface {
 }
 
 export interface PayloadInterface extends SearchResponseInterface {
-    page: 0;
+    page: number;
     currentPage: number;
     searchKeyword: string
 }

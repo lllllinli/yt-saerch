@@ -29,6 +29,8 @@ yarn run start
 + React
 + Redux
 + react-redux
++ react-router-dom
+
 
 + rxjs
 + redux-observable
@@ -37,7 +39,20 @@ yarn run start
 
 + SCSS
 + Bootstrap 5
-+ material icons (use material-ui)
+
 > node-sass 5.0 版會發生衝突，暫時使用 node-sass@4.14.1
 
-### webpack 
+### webpack plugins
+
++ webpack-bundle-analyzer
+
+
+### Redux 
+
++ [typesafe-actions](https://github.com/piotrwitek/typesafe-actions)
+> Typesafe utilities designed to reduce types verbosity and complexity in Redux Architecture.
+
+### Guild
+
++ [React & Redux in TypeScript - Complete Guide](https://github.com/piotrwitek/typesafe-actions)
+

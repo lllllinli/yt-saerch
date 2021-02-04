@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useCallback, useState } from 'react';
-import { Search } from '@material-ui/icons'
 import { InputSearchInterface } from './types';
 import './inputSearch.scss';
 
@@ -24,7 +23,7 @@ const InputSearch: InputSearchInterface = ({
 
     const changeHandle = useCallback((e) => {
         setState(e.target.value);
-    }, []);
+    }, [setState]);
 
     return (
         <div className="yt-search">
@@ -37,7 +36,7 @@ const InputSearch: InputSearchInterface = ({
                 <button
                     onClick={clickHandle}
                     className="btn btn-outline-secondary">
-                    <Search />
+                    <i className="bi bi-search"></i>
                 </button>
             </div>
         </div>
